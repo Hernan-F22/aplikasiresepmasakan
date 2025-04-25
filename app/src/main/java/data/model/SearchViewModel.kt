@@ -20,10 +20,10 @@ class SearchViewModel : ViewModel() {
             override fun onResponse(call: Call<MealResponse>, response: Response<MealResponse>) {
                 if (response.isSuccessful) {
                     val meals = response.body()?.meals
-                    Log.d("SearchViewModel", "Meals response: $meals")
+                    Log.d("API_RESPONSE", "Hasil: $meals")
                     _searchResults.postValue(meals ?: emptyList())
                 } else {
-                    Log.e("SearchViewModel", "Response not successful: ${response.code()}")
+                    Log.e("API_RESPONSE", "Gagal response: ${response.code()}")
                 }
             }
 
