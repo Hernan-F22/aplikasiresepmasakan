@@ -16,9 +16,11 @@
         android:label="Search"
         tools:layout="@layout/fragment_search" />
 
+
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="ui.FavoriteFragment"
         android:label="Favorite" />
+
 </navigation>
 
