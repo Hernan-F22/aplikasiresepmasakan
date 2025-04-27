@@ -16,7 +16,6 @@ class MealAdapter : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
     // Method untuk update data list dan memberitahu RecyclerView untuk update tampilan
     fun setMeals(meals: List<Meal>) {
         mealList = meals
-        notifyDataSetChanged()  // Memberitahu RecyclerView untuk mengupdate tampilan
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
