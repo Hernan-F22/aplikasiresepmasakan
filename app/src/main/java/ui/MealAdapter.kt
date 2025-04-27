@@ -5,14 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.aplikasiresepmasakan.R
 import data.model.Meal
 
-class MealAdapter : ListAdapter<Meal, MealAdapter.MealViewHolder>(MealDiffCallback()) {
+class MealAdapter : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
+    private var mealList = listOf<Meal>()
+
+    // Method untuk update data list dan memberitahu RecyclerView untuk update tampilan
+    fun setMeals(meals: List<Meal>) {
+        mealList = meals
+        notifyDataSetChanged()  // Memberitahu RecyclerView untuk mengupdate tampilan
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_meal, parent, false)
@@ -20,28 +25,22 @@ class MealAdapter : ListAdapter<Meal, MealAdapter.MealViewHolder>(MealDiffCallba
     }
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }
-
-    class MealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val mealImage: ImageView = itemView.findViewById(R.id.ivMealThumb)
-        private val mealName: TextView = itemView.findViewById(R.id.tvMealName)
-        private val mealCategory: TextView = itemView.findViewById(R.id.tvMealCategory)
-
-        fun bind(meal: Meal) {
-            mealImage.load(meal.strMealThumb)
-            mealName.text = meal.strMeal
-            mealCategory.text = "${meal.strCategory} - ${meal.strArea}"
+        val meal = mealList[position]
+        holder.nameTextView.text = meal.strMeal
+        holder.categoryTextView.text = meal.strCategory
+        holder.imageView.load(meal.strMealThumb) {
+            crossfade(true)
         }
     }
 
-    class MealDiffCallback : DiffUtil.ItemCallback<Meal>() {
-        override fun areItemsTheSame(oldItem: Meal, newItem: Meal): Boolean {
-            return oldItem.idMeal == newItem.idMeal
-        }
+    override fun getItemCount(): Int = mealList.size  // Mengembalikan jumlah item di list
 
-        override fun areContentsTheSame(oldItem: Meal, newItem: Meal): Boolean {
-            return oldItem == newItem
-        }
+    inner class MealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val imageView: ImageView = itemView.findViewById(R.id.imageMeal)
+        val nameTextView: TextView = itemView.findViewById(R.id.tvMealName)
+        val categoryTextView: TextView = itemView.findViewById(R.id.tvMealCategory)
     }
 }
+
+
+

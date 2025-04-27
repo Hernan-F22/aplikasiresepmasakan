@@ -31,7 +31,7 @@ class SearchFragment : Fragment() {
         recyclerView.adapter = adapter
 
         viewModel.searchResults.observe(viewLifecycleOwner) { meals ->
-            adapter.submitList(meals)
+            adapter.setMeals(meals)
         }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

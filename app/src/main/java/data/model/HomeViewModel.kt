@@ -9,30 +9,24 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-
 class HomeViewModel : ViewModel() {
-    private val _meal = MutableLiveData<Meal>()
-    val meal: LiveData<Meal> = _meal
+    private val _meals = MutableLiveData<List<Meal>>()
+    val meals: LiveData<List<Meal>> get() = _meals
 
-    init {
-        fetchRandomMeal()
-    }
-
-    fun fetchRandomMeal() {
-        RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<MealResponse> {
+    fun fetchMeals() {
+        RetrofitInstance.api.getMeals().enqueue(object : Callback<MealResponse> {
             override fun onResponse(call: Call<MealResponse>, response: Response<MealResponse>) {
                 if (response.isSuccessful) {
-                    response.body()?.meals?.firstOrNull()?.let {
-                        _meal.postValue(it)
-                    }
+                    val meals = response.body()?.meals ?: emptyList()
+                    _meals.value = meals  // Update LiveData dengan data meal
+                } else {
+                    Log.e("HomeViewModel", "Error fetching meals: ${response.errorBody()}")
                 }
             }
 
             override fun onFailure(call: Call<MealResponse>, t: Throwable) {
-                Log.e("HomeViewModel", "Failed: ${t.message}")
+                Log.e("HomeViewModel", "Failed to fetch meals: ${t.message}")
             }
         })
     }
 }
-
