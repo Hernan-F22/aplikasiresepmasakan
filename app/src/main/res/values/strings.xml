@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Remaja</string>
+    <string name="app_name">REMAJA (Resep Masakan Jawara)</string>
     <string name="title">Judul</string>
     <string name="description">Description</string>
     <string name="review">Review</string>
@@ -7,4 +8,20 @@
     <string name="send">Kirim</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <!-- Navigation -->
+    <string name="menu_home">Home</string>
+    <string name="menu_search">Pencarian</string>
+    <string name="menu_about">About</string>
+    
+    <!-- About -->
+    <string name="about_developers_title">Dikembangkan oleh Tim iiH:</string>
+    <string name="about_developer_1">• Ihsan Darajatul u\'la (231352001)</string>
+    <string name="about_developer_2">• Irfan Zulkarnaen (231352002)</string>
+    <string name="about_developer_3">• Muhamad Hernan Fauzan (241352002)</string>
+    <string name="about_copyright">© 2025 REMAJA (Resep Masakan Jawara)\nAll rights reserved</string>
+    
+    <!-- Navigation Drawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
